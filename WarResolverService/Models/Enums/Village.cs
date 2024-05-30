@@ -2,11 +2,11 @@
 {
     public enum Village
     {
-       Leaf,
-       Sand,
-       Stone,
-       Mist,
-       Cloud,
-       Rain
+        Leaf,
+        Sand,
+        Stone,
+        Mist,
+        Cloud,
+        Rain
     }
 }

@@ -4,7 +4,6 @@ namespace WarResolverClient.Helpers
 {
     internal class RabbitMqHelper
     {
-
         public static IModel CreateChannel(IConnection connection)
         {
             var channel = connection.CreateModel();

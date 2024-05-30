@@ -77,4 +77,3 @@
 - Propper Exception handling
 - Probably a more clear folder structure
 - A battle results aggregator logic
-- Using cleanup and using file level namespace on all files 

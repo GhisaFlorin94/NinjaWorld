@@ -5,7 +5,6 @@ using NinjaWorld.Application.Models.Dtos;
 using NinjaWorld.Application.Models.Orders;
 using NinjaWorld.Domain.Entities;
 using NinjaWorld.Domain.Enums;
-using NinjaWorld.Presentation.Requests;
 
 namespace NinjaWorld.Presentation.Endpoints
 {
@@ -29,7 +28,7 @@ namespace NinjaWorld.Presentation.Endpoints
 
         private static async Task ResetWorld([FromServices] INinjaService ninjaService, [FromBody] int ninjaNumber)
         {
-           await ninjaService.ResetWorldAsync(ninjaNumber);
+            await ninjaService.ResetWorldAsync(ninjaNumber);
         }
 
         private static async Task<Ninja> GetNinjaById([FromServices] INinjaService ninjaService, Guid id)

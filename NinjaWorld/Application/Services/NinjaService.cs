@@ -10,13 +10,13 @@ using NinjaWorld.Domain.Entities;
 using NinjaWorld.Domain.Enums;
 using RabbitMQ.Client;
 using System.Text;
-using System.Text.Json;
 
 namespace NinjaWorld.Application.Services
 {
     public class NinjaService : INinjaService
     {
         private readonly INinjaDbContext _db;
+
         //private readonly IMessagePublisher _messagePublisher;
         private static readonly Random _random = new Random();
 
@@ -24,6 +24,7 @@ namespace NinjaWorld.Application.Services
         {
             _db = ninjaDbContext;
         }
+
         public async Task<Ninja> CreateNinjaAsync(NinjaDto ninjaDto)
         {
             var ninja = ninjaDto.ToNinja();
@@ -56,7 +57,7 @@ namespace NinjaWorld.Application.Services
             if (name != null)
                 query = query.Where(n => n.Name == name);
 
-            if(orderBy != null)
+            if (orderBy != null)
                 query = query.OrderBy(orderBy, orderDirection ?? OrderDirection.Ascending);
             return await query.ToListAsync();
         }
@@ -144,7 +145,7 @@ namespace NinjaWorld.Application.Services
                 {
                     Id = Guid.NewGuid(),
                     Name = ToolNames[_random.Next(ToolNames.Length)],
-                    Power = _random.Next(1,30)
+                    Power = _random.Next(1, 30)
                 };
 
                 tools.Add(tool);

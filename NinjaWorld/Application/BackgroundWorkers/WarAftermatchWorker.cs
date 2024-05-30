@@ -1,11 +1,10 @@
-﻿using RabbitMQ.Client.Events;
-using RabbitMQ.Client;
-using System.Text.Json;
-using NinjaWorld.Application.Models;
-using System.Text;
-using NinjaWorld.Application.Interfaces;
+﻿using Newtonsoft.Json;
 using NinjaWorld.Application.Helpers;
-using Newtonsoft.Json;
+using NinjaWorld.Application.Interfaces;
+using NinjaWorld.Application.Models;
+using RabbitMQ.Client;
+using RabbitMQ.Client.Events;
+using System.Text;
 
 namespace NinjaWorld.Application.BackgroundWorkers
 {
@@ -15,7 +14,6 @@ namespace NinjaWorld.Application.BackgroundWorkers
         private IModel _channel;
         private EventingBasicConsumer _consumer;
         private readonly IServiceScopeFactory _scopeFactory;
-
 
         public WarAftermatchWorker(IServiceScopeFactory scopeFactory)
         {

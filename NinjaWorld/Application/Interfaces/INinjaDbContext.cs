@@ -7,7 +7,8 @@ public interface INinjaDbContext
 {
     DbSet<Ninja> Ninja { get; set; }
     DbSet<Tool> Tool { get; set; }
-    public Task<int> SaveChangesAsync(CancellationToken cancellationToken);
-    public int SaveChanges();
 
+    public Task<int> SaveChangesAsync(CancellationToken cancellationToken);
+
+    public int SaveChanges();
 }

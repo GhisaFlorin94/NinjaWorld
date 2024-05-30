@@ -4,7 +4,6 @@ namespace NinjaWorld.Application.Helpers
 {
     internal class RabbitMqHellper
     {
-
         public static IModel CreateChannel(IConnection connection)
         {
             var channel = connection.CreateModel();

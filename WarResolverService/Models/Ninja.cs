@@ -1,5 +1,4 @@
-﻿
-namespace WarResolverClient.Models
+﻿namespace WarResolverClient.Models
 {
     public class Ninja
     {

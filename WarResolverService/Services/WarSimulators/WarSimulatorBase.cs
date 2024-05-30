@@ -1,17 +1,16 @@
-﻿using System;
-using WarResolverClient.Models;
+﻿using WarResolverClient.Models;
 using WarResolverClient.Services.Interfaces;
 
 namespace WarResolverClient.Services.WarSimulators
 {
-    internal abstract class WarSimulatorBase: IWarSimulator
+    internal abstract class WarSimulatorBase : IWarSimulator
     {
         protected static int CalculateTotalPower(IEnumerable<Ninja> ninjas)
         {
             var random = new Random();
             var power = ninjas.Sum(ninja => ninja.Power + ninja.Tools.Sum(tool => tool.Power));
             var luckFactor = random.NextDouble() * 0.4 - 0.2;
-            return (int) Math.Round(power + power * luckFactor);
+            return (int)Math.Round(power + power * luckFactor);
         }
 
         protected static List<Ninja> CalculateCasualties(List<Ninja> army, int opposingPower, bool isLosingArmy)
@@ -31,8 +30,9 @@ namespace WarResolverClient.Services.WarSimulators
                 powerLoss -= ninjaTotalPower;
             }
 
-            return army.Where(a => !remainingArmy.Select(ra=>ra.Id).Contains(a.Id)).ToList();
+            return army.Where(a => !remainingArmy.Select(ra => ra.Id).Contains(a.Id)).ToList();
         }
+
         protected static WarResult CalculateFightOutcome(List<Ninja> attackingList, int attackingPower, List<Ninja> defendingList, int defendingPower)
         {
             var result = new WarResult();
@@ -57,6 +57,7 @@ namespace WarResolverClient.Services.WarSimulators
         }
 
         protected abstract int ApplyBattleGroundDefendingFactor(List<Ninja> defendingArmy, int initialPower);
+
         public abstract WarResult SimulateWar(IEnumerable<Ninja> attackingForce, IEnumerable<Ninja> defendingForce);
     }
 }

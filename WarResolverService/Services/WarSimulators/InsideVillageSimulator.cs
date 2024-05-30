@@ -1,6 +1,4 @@
 ﻿using WarResolverClient.Models;
-using WarResolverClient.Models.Enums;
-using WarResolverClient.Services.Interfaces;
 
 namespace WarResolverClient.Services.WarSimulators
 {

@@ -12,6 +12,7 @@ namespace WarResolverClient.Services
         private readonly IBattleAgregatorService _battleAgregatorService;
 
         private readonly Dictionary<BattleGround, IWarSimulator> _battleGroundScenarios;
+
         public WarResolverService(IBattleAgregatorService battleAgregatorService)
         {
             _battleAgregatorService = battleAgregatorService;
@@ -25,7 +26,7 @@ namespace WarResolverClient.Services
         }
 
         public WarResult ResolveWar(WarDeclarationRequest warDeclarationRequest)
-        {      
+        {
             var fightResults = new List<WarResult>();
 
             Parallel.For(0, _numberOfSimulations, index =>

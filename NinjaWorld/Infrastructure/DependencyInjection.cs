@@ -1,6 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using NinjaWorld.Application.Interfaces;
-using NinjaWorld.Application.Services;
 using NinjaWorld.Infrastructure.Data;
 using Npgsql;
 

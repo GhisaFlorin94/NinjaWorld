@@ -1,11 +1,9 @@
 ﻿using WarResolverClient.Models;
-using WarResolverClient.Models.Enums;
 
 namespace WarResolverClient.Services.WarSimulators
 {
     internal class VillageGateSimulator : WarSimulatorBase
     {
-
         public override WarResult SimulateWar(IEnumerable<Ninja> attackingForce, IEnumerable<Ninja> defendingForce)
         {
             var attackingList = attackingForce.ToList();

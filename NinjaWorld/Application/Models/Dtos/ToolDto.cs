@@ -1,5 +1,4 @@
 ﻿using NinjaWorld.Domain.Entities;
-using NinjaWorld.Domain.Enums;
 
 namespace NinjaWorld.Application.Models.Dtos
 {

@@ -1,13 +1,12 @@
-﻿using RabbitMQ.Client.Events;
-using RabbitMQ.Client;
-using System.Text;
+﻿using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using System.Text.Json;
-using WarResolverClient.Models;
-using Microsoft.Extensions.DependencyInjection;
-using WarResolverClient.Services.Interfaces;
-using WarResolverClient.Helpers;
 using Newtonsoft.Json;
+using RabbitMQ.Client;
+using RabbitMQ.Client.Events;
+using System.Text;
+using WarResolverClient.Helpers;
+using WarResolverClient.Models;
+using WarResolverClient.Services.Interfaces;
 
 namespace WarResolverClient.BackgroundWorkers
 {
@@ -17,7 +16,6 @@ namespace WarResolverClient.BackgroundWorkers
         private IModel _channel;
         private EventingBasicConsumer _consumer;
         private readonly IServiceScopeFactory _scopeFactory;
-
 
         public WarResolverWorker(IServiceScopeFactory scopeFactory)
         {
@@ -30,13 +28,13 @@ namespace WarResolverClient.BackgroundWorkers
             var factory = new ConnectionFactory() { HostName = "rabbitmq" };
             var connection = factory.CreateConnection();
 
-            _channel =  RabbitMqHelper.CreateChannel(connection);
+            _channel = RabbitMqHelper.CreateChannel(connection);
             _consumer = new EventingBasicConsumer(_channel);
             _channel.BasicConsume(queue: Constants.RequestQueueName, autoAck: true, consumer: _consumer);
         }
 
         protected override Task ExecuteAsync(CancellationToken stoppingToken)
-        {  
+        {
             _consumer.Received += (model, ea) =>
             {
                 var message = Encoding.UTF8.GetString(ea.Body.ToArray());
