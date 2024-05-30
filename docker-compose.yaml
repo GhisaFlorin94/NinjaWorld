@@ -1,0 +1,80 @@
+version: '3.8'
+services:
+  db:
+    image: postgres:16.2
+    container_name: postgres_db
+    restart: on-failure
+    command:  -c log_statement=all -c log_line_prefix='%m [%p] %u@%d/%a ' -c log_connections=on -c log_disconnections=on 
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=PostgresPassword
+    depends_on:   
+      rabbitmq:
+        condition: service_healthy 
+    healthcheck:
+      test: [ "CMD", "pg_isready", "-q", "-d", "postgres", "-U", "postgres" ]
+      interval: 5s
+      retries: 3
+      start_period: 3s
+    ports:
+      - "5432:5432"
+    volumes:
+      - pg-data:/var/lib/pg_data
+      - postgresql-data:/var/lib/postgresql/data
+    networks:
+      - app-network
+      
+  rabbitmq:
+    image: "rabbitmq:3-management"
+    user: "rabbitmq"
+    ports:
+      - "5672:5672"
+      - "15672:15672"
+    volumes:
+      - rabbitmq_data:/data
+      - './rabbitmq-healthcheck.sh:/rabbitmq-healthcheck.sh'
+    healthcheck:
+      test: rabbitmq-diagnostics -q ping
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 10s
+    networks:
+      - app-network      
+      
+  ninja_world:
+    container_name: ninja_world
+    build:
+      context: ./
+      dockerfile: ./NinjaWorld/NinjaWorld.Dockerfile
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+    ports:
+      - "8080:8080"
+    depends_on:   
+      db:
+        condition: service_healthy
+      rabbitmq:
+        condition: service_healthy
+    networks:
+      - app-network
+  war_resolver_service:
+    container_name: war_resolver_service
+    build:
+      context: ./
+      dockerfile: ./WarResolverService/WarResolverService.Dockerfile
+    depends_on:   
+      db:
+        condition: service_healthy
+      rabbitmq:
+        condition: service_healthy
+    networks:
+      - app-network
+volumes:
+  pg-data:
+  postgresql-data:
+  rabbitmq_data:
+  
+networks:
+  app-network:
+    driver: bridge

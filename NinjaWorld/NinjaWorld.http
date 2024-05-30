@@ -1,0 +1,60 @@
+@NinjaWorld_HostAddress = http://localhost:8080
+
+POST {{NinjaWorld_HostAddress}}/ninjas/
+Accept: application/json
+Content-Type: application/json
+
+{
+  "name": "Naruto",
+  "rank": 1,
+  "village": 0,
+  "power": 13,
+  "tools": [
+    {
+      "name": "Cunai",
+      "power": 1
+    }
+  ]
+}
+###
+
+GET {{NinjaWorld_HostAddress}}/ninjas/{8c24e35e-71f7-43db-b5ee-a28faa093d70}
+Accept: application/json
+###
+
+PUT {{NinjaWorld_HostAddress}}/ninjas/{8c24e35e-71f7-43db-b5ee-a28faa093d70}
+Accept: application/json
+Content-Type: application/json
+
+{
+  "name": "Naruto2",
+  "rank": 0,
+  "village": 0,
+  "power": 5,
+  "tools": [
+    {
+      "name": "Cunai",
+      "power": 2
+    }
+  ]
+}
+###
+GET {{NinjaWorld_HostAddress}}/ninjas?orderBy=name&orderDirection=Ascending
+Accept: application/json
+
+###
+POST {{NinjaWorld_HostAddress}}/world/reset
+Accept: application/json
+Content-Type: application/json
+
+45
+
+###
+POST {{NinjaWorld_HostAddress}}/world/war
+Accept: application/json
+Content-Type: application/json
+
+{
+  "attackingVillage": 1,
+  "defendingVillage": 3
+}
