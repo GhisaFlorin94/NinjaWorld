@@ -32,7 +32,6 @@ services:
       - "15672:15672"
     volumes:
       - rabbitmq_data:/data
-      - './rabbitmq-healthcheck.sh:/rabbitmq-healthcheck.sh'
     healthcheck:
       test: rabbitmq-diagnostics -q ping
       interval: 10s
