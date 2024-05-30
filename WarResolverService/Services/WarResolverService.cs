@@ -32,14 +32,14 @@ namespace WarResolverClient.Services
             Parallel.For(0, _numberOfSimulations, index =>
             {
                 var battleGround = (BattleGround)_random.Next(Enum.GetValues(typeof(BattleGround)).Length);
-                _battleGroundScenarios.TryGetValue(battleGround, out var scenario); //Design pattern: Strategy
+                _battleGroundScenarios.TryGetValue(battleGround, out var scenario); //@request Design pattern: Strategy
                 if (scenario == null)
                 {
                     throw new Exception("Unsupported battleGround");
                 }
 
                 var result = scenario.SimulateWar(warDeclarationRequest.AttackingArmy, warDeclarationRequest.DefendingArmy);
-                lock (fightResults) //updated using thread safe mechanisms
+                lock (fightResults) //@request updated using thread safe mechanisms
                 {
                     fightResults.Add(result);
                 }

@@ -77,3 +77,4 @@
 - Propper Exception handling
 - Probably a more clear folder structure
 - A battle results aggregator logic
+- RabbitMq code could have been decupled from the Busines logic(eg. create a publisher for each queue, and have a Factory/Strategy pattern that gets the proper publisher based on the message type) 

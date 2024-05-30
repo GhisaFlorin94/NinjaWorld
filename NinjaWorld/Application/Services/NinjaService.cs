@@ -13,7 +13,7 @@ using System.Text;
 
 namespace NinjaWorld.Application.Services
 {
-    public class NinjaService : INinjaService
+    public class NinjaService : INinjaService //@request CRUD  opperations on a entity from DB
     {
         private readonly INinjaDbContext _db;
 

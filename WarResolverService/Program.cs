@@ -7,7 +7,7 @@ using WarResolverClient.Services.Interfaces;
 
 public class Program
 {
-    public static void Main(string[] args)
+    public static void Main(string[] args) //@request Console app that get information from a msg broker
     {
         CreateHostBuilder(args).Build().Run();
     }
@@ -16,8 +16,8 @@ public class Program
         Host.CreateDefaultBuilder(args)
             .ConfigureServices((hostContext, services) =>
             {
-                services.AddHostedService<WarResolverWorker>(); // In background the worker is instatiated as a Singleton
-                services.AddScoped<IWarResolverService, WarResolverService>();
-                services.AddTransient<IBattleAgregatorService, BattleAgregatorService>(); // small statelles service used to perform some computation
+                services.AddHostedService<WarResolverWorker>(); //@request In background the worker is instatiated as a Singleton
+                services.AddScoped<IWarResolverService, WarResolverService>(); //@request scoped service
+                services.AddTransient<IBattleAgregatorService, BattleAgregatorService>(); // @request small stateless service used to perform some computation
             });
 }
